@@ -72,8 +72,8 @@ This project automates the entire notification flow using **n8n**.
 #### N8N Canvas Page  
 ![Home Page](https://github.com/user-attachments/assets/53dc5dc8-4beb-439b-82ff-b8282b6da85c)
 
-#### Results Page 1 
-![Result Page](https://github.com/user-attachments/assets/1394bb69-9670-4f9c-823a-f982366eb7af)
+#### Telegram Results Page 
+![Result Page](https://github.com/user-attachments/assets/15c3d64c-7a78-4bc0-9951-7387153ed4c4)
 
 ---
 

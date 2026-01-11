@@ -1,0 +1,341 @@
+{
+  "name": "Form Responses",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "seconds",
+              "secondsInterval": 2
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -384,
+        -192
+      ],
+      "id": "8db40486-aa95-4e17-b1eb-d7b8daf997c3",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "18Pj7GwK4ieSXDJ8AsaunvDNjSvD0dXKivgt0hUoirbk",
+          "mode": "list",
+          "cachedResultName": "Workshop Registration Form",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/18Pj7GwK4ieSXDJ8AsaunvDNjSvD0dXKivgt0hUoirbk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 996962880,
+          "mode": "list",
+          "cachedResultName": "Form Responses 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/18Pj7GwK4ieSXDJ8AsaunvDNjSvD0dXKivgt0hUoirbk/edit#gid=996962880"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -176,
+        -192
+      ],
+      "id": "09d3bb3e-8dd9-4dcd-9022-da3718279ef6",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "OMNk3aB3qQXF6JDH",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "9845a118-8ccc-4531-b1d9-5c1d4b740799",
+              "leftValue": "={{ $json['WhatsApp Number'] }}",
+              "rightValue": 10,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        32,
+        -192
+      ],
+      "id": "bdb02395-f9ca-4475-9235-116ccdccd437",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json[' Email '] }}",
+        "subject": "Confirmation: AI/ML Workshop Registration Details",
+        "emailType": "text",
+        "message": "=Greeting  {{ $json.Name }},\n\nThank you for registering for our **AI/ML Workshop**. We’re happy to confirm your registration and share the details below.\n\n**Workshop Details**\n\n* **Workshop Day:** {{ $json['Workshop Day  '] }}\n* **Timing:** {{ $json.Timing }}\n* **Language:** {{ $json.Language }}\n* **Mode:** Online (Google Meet)\n\n**Google Meet Link**\n\nhttps://meet.google.com/pru-svqd-bbr\n\nPlease make sure you join the session 5–10 minutes early to avoid any last-minute issues. We recommend using a stable internet connection and keeping your microphone muted unless speaking.\n\nIf you have any questions before the session, feel free to reply to this email. We look forward to having you with us and hope you have a great learning experience.\n\nBest regards,\n\nAI/ML Workshop Team\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        464,
+        -384
+      ],
+      "id": "9891fd89-c8d5-4c83-bfb3-d82b05badb5e",
+      "name": "Send a message2",
+      "webhookId": "bc75428d-2152-4f75-a832-1284acb22bd3",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YFIZ6USrDI2KZLdH",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "documentId": {
+          "__rl": true,
+          "value": "18Pj7GwK4ieSXDJ8AsaunvDNjSvD0dXKivgt0hUoirbk",
+          "mode": "list",
+          "cachedResultName": "Workshop Registration Form",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/18Pj7GwK4ieSXDJ8AsaunvDNjSvD0dXKivgt0hUoirbk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 996962880,
+          "mode": "list",
+          "cachedResultName": "Form Responses 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/18Pj7GwK4ieSXDJ8AsaunvDNjSvD0dXKivgt0hUoirbk/edit#gid=996962880"
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        704,
+        -384
+      ],
+      "id": "64f4cee6-0f33-4b2d-9621-c4239c2400da",
+      "name": "Delete rows or columns from sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "OMNk3aB3qQXF6JDH",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1Os2C8QLNwQEBaeZz8OiEEI75P6Hv7EjeJL-yRFMZQ98",
+          "mode": "list",
+          "cachedResultName": "Workshope  Reminder",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Os2C8QLNwQEBaeZz8OiEEI75P6Hv7EjeJL-yRFMZQ98/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1Os2C8QLNwQEBaeZz8OiEEI75P6Hv7EjeJL-yRFMZQ98/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json.Name }}",
+            " Email ": "={{ $json.Email }}",
+            "WhatsApp ": "={{ $json['WhatsApp Number'] }}",
+            " Timing  ": "={{ $json['Workshop Day  '] }}",
+            " Workshop Date ": "={{ $json['Workshop Day  '] }}",
+            "Language ": "={{ $json.Language }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": " Email ",
+              "displayName": " Email ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "WhatsApp ",
+              "displayName": "WhatsApp ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": " Workshop Date ",
+              "displayName": " Workshop Date ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": " Timing  ",
+              "displayName": " Timing  ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Language ",
+              "displayName": "Language ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Reminded",
+              "displayName": "Reminded",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        240,
+        -384
+      ],
+      "id": "de169cfe-9d95-4ecb-a5a4-bf9845707792",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "OMNk3aB3qQXF6JDH",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message2": {
+      "main": [
+        [
+          {
+            "node": "Delete rows or columns from sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete rows or columns from sheet1": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "timezone": "Asia/Kolkata",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "043165ea-6a7c-42a6-a89c-6352ac35eba5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "9fe406923d291897eb0509c6cb6010d505fc5e0d10079aee449a5560fcbf43af"
+  },
+  "id": "CiAMl3QeR89gB1Gu",
+  "tags": []
+}
